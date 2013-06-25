@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: normal 62.5% "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.switch {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  background: red;
+}
+
+.switch ul {
+  margin-top: 20px;
+}
+
+.switch li {
+  display: inline-block;
+}
+
+.switch a.selected {
+  color: green;
+}
+
+.slider {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  background: blue;
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Twitter — NBA</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="robots">
+
+  <!-- TODO: metas -->
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="CartoDB.com">
+  <meta name="DC.title" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content=""> 
+  <meta property="og:type" content="Visualization">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <script src="scripts/vendor/modernizr.js"></script>
+</head>
+<body>
+  <section class="map">
+    <div class="mamufas">
+      <!-- Header -->
+      <header class="header map_header clearfix">
+        <a href="/" class="logo"></a>
+
+        <h1 class="title">Title</h1>
+        <p class="subtitle">Subtitle</p>
+      </header>
+
+      <!-- TODO: Social -->
+      <div class="social">
+        <a href="" target="_blank" class="button twitter"><span>Share on Twitter</span></a>
+      </div>
+
+      <div id="spinner-container"></div>
+
+      <!-- Content -->
+      <div id="content" class="inner">
+        <div class="content-inner">
+          <p>Content</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Switch -->
+    <nav id="switch" class="switch">
+      <ul class="menu">
+        <li>
+          <a href="#" id="static" class="selected">Static</a>
+        </li>
+
+        <li>
+          <a href="#" id="dynamic">Dynamic</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Slider -->
+    <div id="slider" class="slider">
+      <div id="time_slider" class="time_slider"></div>
+      <span id="day" class="day">06/25/2013</span>
+    </div>
+
+    <!-- Map components -->
+    <div id="map_components" class="components">
+      <div id="zoom_control">
+        <a href="#zoomIn" class="zoomIn">+</a>
+        <a href="#zoomOut" class="zoomOut">-</a>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map_wrapper" class="backdrop">
+      <div id="map" class="city_map"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="inner clearfix">
+      <p>© 2013 Twitter and CartoDB</p>
+    </div>
+  </footer>
+
+  <!-- TODO: Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='https://www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <script src="scripts/data/cities.js"></script>
+
+  <script src="scripts/vendor/jquery/jquery-2.0.1.js"></script>
+  <script src="scripts/vendor/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="scripts/vendor/detectdevice.js"></script>
+  <script src="scripts/vendor/jquery-ui-1.10.2.custom.js"></script>
+  <script src="scripts/vendor/underscore.js"></script>
+
+  <script src="scripts/vendor/leaflet.js"></script>
+  <script src="scripts/vendor/spin.js"></script>
+  <script src="scripts/events.js"></script>
+  <script src="scripts/util.js"></script>
+  <script src="scripts/slider.js"></script>
+  <script src="scripts/switch.js"></script>
+  <script src="scripts/map/zoom.js"></script>
+  <script src="scripts/map.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
