@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+    <![endif]-->
+
+  </head>
+    
+  <body>
+
+    <div id="map"></div>
+    <div id="counter" style="position:absolute; top: 100px;">10</div>
+  </body>
+
+
+  <!-- include cartodb.js library -->
+  <script src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+  <script src="leaflet_tileloader_mixin.js"></script>
+  <script src="canvas_layer.js"></script>
+  <script src="time_layer.js"></script>
+  <script>
+
+    function main() {
+
+      var map = L.map('map', { 
+        zoomControl: false,
+        center: [41.39, 2.178],
+        zoom: 13
+      })
+      window.map = map;
+
+      L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+      //http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+        attribution: 'MapBox'
+      }).addTo(map);
+
+      var options = {
+        user : "saleiva2",
+        table : "mwc_torque",
+        column : "date",
+        blendmode : 'source-over',
+        trails : false,
+        point_type : 'square',
+        cumulative : true,
+        resolution : 2,
+        steps : 750,
+        step: 15*60,
+        fps : 30,
+        fitbounds : 1,
+        clock : true,
+        countby:'sum(i.amount)',
+      }
+
+      var layer = new L.TimeLayer(options).addTo(map);
+      layer.play();
+
+    }
+
+    // you could use $(window).load(main);
+    window.onload = main;
+
+  </script>
+
+
+</html>
