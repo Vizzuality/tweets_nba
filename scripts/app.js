@@ -1,40 +1,17 @@
 var App = {
 
   animables: [], // list of objects need to be updated and rendered
-  old_time: 0,
-  time: 0,
-
-  init_time: window.AppData.init_time,
-  last_time: window.AppData.last_time,
-
-  isLoaded: false,
-  isPlayed: false,
 
   initialize: function(options) {
     var self = this;
 
     this.options = _.extend({}, options);
 
-    var reduction = isSlowBrowser ?
-      (this.options.reductionSlowBrowser || 0) : 0;
-
-    this.map = new Map('map', {
-      zoomControl: false,
-      scrollWheelZoom: false,
-      center: this.options.map.center,
-      zoom: this.options.map.zoom,
-      minZoom: this.options.map.minZoom,
-      maxZoom: this.options.map.maxZoom,
-      // scrollWheelZoom: false,
-      // doubleClickZoom: false,
-      city: this.options.city,
-      time_offset: this.options.time_offset,
-      reduction: reduction,
-      use_web_worker: isWebWorkers
-    });
+    // Map
+    this.map = new Map();
 
     // Switch
-    this.switch = new Switch($('#switch'), {});
+    this.switch = new Switch($('#switch'));
 
 
     // ****
@@ -44,33 +21,14 @@ var App = {
     // Slider
     this.slider = new Slider($('#slider'), {
       timeMin: new Date(this.init_time).getTime(),
-      timeRange: (this.last_time - this.init_time) * 1,
-      map: this.map.map,
-      city: this.options.city
-    }, this.map.map, this.options.city);
-
-    // Set map controls
-    Zoom.initialize(this.map.map, this.options.city);
+      timeRange: (this.last_time - this.init_time) * 1
+    });
 
     this._initBindings();
     
     this.animables.push(this.map, this.slider);
     this._tick = this._tick.bind(this);
     requestAnimationFrame(this._tick);
-
-    if(isDebug)
-      setTimeout(function() {
-        self.add_debug();
-      }, 4000);
-
-    if(this.options.time != 0) {
-      Events.trigger("disableanimation", this.map.map, this.options.time);
-    }
-
-    Events.on('finish_loading', function() {
-      self.isLoaded = true;
-      Events.trigger("stopanimation");
-    });
   },
 
   _initBindings: function() {
@@ -84,16 +42,6 @@ var App = {
     Events.on("changetime", function(time) {
       self.time = time >> 0;
     });
-  },
-
-  _onEnableAnimation: function() {
-    Events.off('finish_loading');
-    this.isPlayed = true;
-
-    Events.trigger("resumeanimation");
-  },
-
-  _onDisableAnimation: function() {
   },
 
   _onResumeAnimation: function() {

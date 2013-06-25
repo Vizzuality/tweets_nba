@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Twitter — NBA</title>
+  <title>Twitter and CartoDB &mdash; 2013 NBA Playoffs</title>
   <meta name="viewport" content="width=device-width">
   <meta name="robots">
 
@@ -18,74 +18,45 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+    <![endif]-->
   <link rel="stylesheet" href="styles/main.css">
 
   <script src="scripts/vendor/modernizr.js"></script>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
 </head>
 <body>
-  <section class="map">
-    <div class="mamufas">
-      <!-- Header -->
-      <header class="header map_header clearfix">
-        <a href="/" class="logo"></a>
+  <!-- Header -->
+  <header class="header map_header clearfix">
+    <a href="http://cartodb.com/" class="logo"></a>
 
-        <h1 class="title">Title</h1>
-        <p class="subtitle">Subtitle</p>
-      </header>
+    <h1 class="title">2013 NBA Playoffs</h1>
+    <p class="subtitle">Amount of tweets during Playoff Finals</p>
+  </header>
 
-      <!-- TODO: Social -->
-      <div class="social">
-        <a href="" target="_blank" class="button twitter"><span>Share on Twitter</span></a>
-      </div>
+  <!-- Switch -->
+  <nav id="switch" class="switch">
+    <ul class="menu">
+      <li class="selected">
+        <a href="#" id="static">Static</a>
+      </li>
 
-      <div id="spinner-container"></div>
+      <li>
+        <a href="#" id="dynamic">Dynamic</a>
+      </li>
+    </ul>
+  </nav>
 
-      <!-- Content -->
-      <div id="content" class="inner">
-        <div class="content-inner">
-          <p>Content</p>
-        </div>
-      </div>
-    </div>
+  <!-- Slider -->
+  <div id="slider_wrapper" class="slider_wrapper">
+    <div id="slider" class="slider"></div>
+    <p id="hour" class="hour">23:00</p>
+  </div>
 
-    <!-- Switch -->
-    <nav id="switch" class="switch">
-      <ul class="menu">
-        <li>
-          <a href="#" id="static" class="selected">Static</a>
-        </li>
-
-        <li>
-          <a href="#" id="dynamic">Dynamic</a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Slider -->
-    <div id="slider" class="slider">
-      <div id="time_slider" class="time_slider"></div>
-      <span id="day" class="day">06/25/2013</span>
-    </div>
-
-    <!-- Map components -->
-    <div id="map_components" class="components">
-      <div id="zoom_control">
-        <a href="#zoomIn" class="zoomIn">+</a>
-        <a href="#zoomOut" class="zoomOut">-</a>
-      </div>
-    </div>
-
-    <!-- Map -->
-    <div id="map_wrapper" class="backdrop">
-      <div id="map" class="city_map"></div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="inner clearfix">
-      <p>© 2013 Twitter and CartoDB</p>
-    </div>
-  </footer>
+  <!-- Map -->
+  <div id="map" class="map"></div>
 
   <!-- TODO: Google Analytics -->
   <script>
@@ -95,21 +66,18 @@
     s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
 
-  <script src="scripts/data/cities.js"></script>
-
-  <script src="scripts/vendor/jquery/jquery-2.0.1.js"></script>
-  <script src="scripts/vendor/jquery/jquery-migrate-1.2.1.min.js"></script>
   <script src="scripts/vendor/detectdevice.js"></script>
   <script src="scripts/vendor/jquery-ui-1.10.2.custom.js"></script>
   <script src="scripts/vendor/underscore.js"></script>
-
-  <script src="scripts/vendor/leaflet.js"></script>
   <script src="scripts/vendor/spin.js"></script>
+  <script src="scripts/leaflet_tileloader_mixin.js"></script>
+  <script src="scripts/canvas_layer.js"></script>
+  <script src="scripts/time_layer.js"></script>
+
   <script src="scripts/events.js"></script>
   <script src="scripts/util.js"></script>
   <script src="scripts/slider.js"></script>
   <script src="scripts/switch.js"></script>
-  <script src="scripts/map/zoom.js"></script>
   <script src="scripts/map.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/main.js"></script>

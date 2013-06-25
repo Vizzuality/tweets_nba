@@ -1,11 +1,8 @@
-function Slider(el, options, map, city) {
+function Slider(el, options) {
   var self = this;
 
-  this.map = map;
-  this.city = city;
-
   this.$el = el;
-  this.$slider_container = $("#slider");
+  this.$slider_container = $("#slider_wrapper");
 
   this.options = {
     timeMin: options.timeMin,
@@ -74,15 +71,14 @@ Slider.prototype = {
   },
 
   _onEnableSlider: function() {
-    console.log($(this.$el));
-    $(this.$el).animate({
-      bottom: '50px'
+    $(this.$slider_container).animate({
+      bottom: '30px'
     });
   },
 
   _onDisableSlider: function() {
-    $(this.$el).animate({
-      bottom: '-50px'
+    $(this.$slider_container).animate({
+      bottom: '-110px'
     });
 
     Events.trigger("stopanimation");
@@ -94,12 +90,10 @@ Slider.prototype = {
     Events.trigger("changetime", time);
 
     this.updateHour(time);
-    this.updateSky(pos);
   },
 
   onSlideStop: function(pos) {
     var time = this.posToTime(pos);
-    var zoom = this.map.getZoom();
 
     this.$el.slider("value", pos);
 
@@ -136,10 +130,5 @@ Slider.prototype = {
     this.$el.slider("value", this.timeToPos(time));
 
     this.updateHour(time);
-  },
-
-  set_city: function(city, map) {
-    this.city = city;
-    this.map = map;
   }
 }

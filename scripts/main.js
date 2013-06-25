@@ -1,30 +1,18 @@
+var START_DATE = 1371160800,
+    END_DATE = 1371938174,
+    BALLS_COLOR_ES = 'rgba(255, 77, 77, .4)',
+    BALLS_COLOR_NO_ES = 'rgba(238, 238, 238, .2)',
+    BALL_SIZE_GAIN = 3; // ball size is greater when this value is increased,
+    BALL_ANIMATION_SPEED = 3; // no more than 5,
+    dragged = false,
+    clicked = false,
+    stopped = true,
+    valueStart = 0;
+
 if($.browser.mobile) {
   document.location = "/mobile.html";
 } else if(Modernizr.canvas) {
-  // TODO: GLOBAL VARS
-  var city = 'london',
-      dragged = false,
-      clicked = false,
-      stopped = true,
-      valueStart = 0,
-      isSlowBrowser = false,
-      isWebWorkers = true,
-      isDebug = false;
-
-  if(!Modernizr.webworkers) {
-    isWebWorkers = false;
-  }
-
-  if(checkVersion()) {
-    isSlowBrowser = true;
-  }
-
-  if(location.hash.indexOf('debug') != -1)
-    isDebug = true;
-
-  App.initialize(window.AppData.CITIES[city]);
-
-  // TODO: 404.html
+  App.initialize();
 } else {
   document.location = "/oldbrowsers.html";
 }
