@@ -6,7 +6,7 @@ var START_DATE = 1371160800,
     BALL_ANIMATION_SPEED = 3; // no more than 5,
     dragged = false,
     clicked = false,
-    stopped = true,
+    stopped = false,
     valueStart = 0;
 
 if($.browser.mobile) {
