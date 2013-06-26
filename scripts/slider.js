@@ -1,27 +1,22 @@
-function Slider(el, options, map, city) {
+function Slider(el, options) {
   var self = this;
 
-  this.map = map;
-  this.city = city;
-
   this.$el = el;
-  this.$slider_container = $("#slider");
+  this.$slider_container = $("#slider_wrapper");
 
   this.options = {
     timeMin: options.timeMin,
     timeRange: options.timeRange
   };
 
+  this.valueStop = 0;
+
   self.initialize();
 }
 
 Slider.prototype = {
   initialize: function() {
-    var self = this;
-
-    this.valueStop = 0;
-
-    self.$el.slider();
+    this.$el.slider();
     this._initBindings();
   },
 
@@ -30,6 +25,8 @@ Slider.prototype = {
 
     Events.on("enableslider", this._onEnableSlider, this);
     Events.on("disableslider", this._onDisableSlider, this);
+    Events.on("resumeanimation", this._onResumeAnimation, this);
+    Events.on("stopanimation", this._onStopAnimation, this);
 
     Events.on("clickhandle", function(val) {
       clicked = true;
@@ -53,10 +50,10 @@ Slider.prototype = {
 
     this.$el
       .on("slide", function(event, ui) {
-        self.onSlideStart(ui.value);
+        self._onSlideStart(ui.value);
       })
       .on("slidestop", function(event, ui) {
-        self.onSlideStop(ui.value);
+        self._onSlideStop(ui.value);
       })
       .find("a")
         .on("mousedown", function() {
@@ -74,32 +71,29 @@ Slider.prototype = {
   },
 
   _onEnableSlider: function() {
-    console.log($(this.$el));
-    $(this.$el).animate({
-      bottom: '50px'
-    });
+    $(this.$slider_container).animate({
+      bottom: '30px'
+    }, 250);
   },
 
   _onDisableSlider: function() {
-    $(this.$el).animate({
-      bottom: '-50px'
-    });
+    $(this.$slider_container).animate({
+      bottom: '-110px'
+    }, 250);
 
     Events.trigger("stopanimation");
   },
 
-  onSlideStart: function(pos) {
+  _onSlideStart: function(pos) {
     var time = this.posToTime(pos);
 
     Events.trigger("changetime", time);
 
     this.updateHour(time);
-    this.updateSky(pos);
   },
 
-  onSlideStop: function(pos) {
+  _onSlideStop: function(pos) {
     var time = this.posToTime(pos);
-    var zoom = this.map.getZoom();
 
     this.$el.slider("value", pos);
 
@@ -108,24 +102,38 @@ Slider.prototype = {
     this.updateHour(time);
   },
 
+  _onResumeAnimation: function() {
+    stopped = false;
+
+    $(".ui-slider-handle").removeClass("stopped");
+  },
+
+  _onStopAnimation: function() {
+    stopped = true;
+
+    $(".ui-slider-handle").addClass("stopped");
+  },
+
   updateHour: function(time) {
-    var offset = new Date().getTimezoneOffset()*60*1000;
-    var timeUpdated = new Date(this.options.timeMin + 1000 * time  + offset);
+    var timeUpdated = new Date(time*1000);
+
     var hours = timeUpdated.getHours();
     var minutes = timeUpdated.getMinutes();
+    var date = timeUpdated.getDate();
+    var month = timeUpdated.getMonth() + 1;
+    var year = timeUpdated.getFullYear();
 
-    if(minutes%2 === 0) {
-      minutes = (minutes<10?'0':'') + minutes;
-      $("#hour").text(hours + ":" + minutes);
-    };
+    minutes = (minutes<10?'0':'') + minutes;
+
+    $("#hour").html(hours + ":" + minutes + '<br /><span>' + date + '/' + month + '/' + year + '</span>');
   },
 
   posToTime: function(pos) {
-    return pos * 60 * this.options.timeRange / 100;
+    return pos * this.options.timeRange / 100 + this.options.timeMin;
   },
 
   timeToPos: function(time) {
-    return 100 * time / (60 * this.options.timeRange);
+    return (time - this.options.timeMin) * 100 / this.options.timeRange;
   },
 
   render: function() { // empty on purpose
@@ -136,10 +144,5 @@ Slider.prototype = {
     this.$el.slider("value", this.timeToPos(time));
 
     this.updateHour(time);
-  },
-
-  set_city: function(city, map) {
-    this.city = city;
-    this.map = map;
   }
 }

@@ -1,8 +1,5 @@
-function Switch(el, options) {
+function Switch(el) {
   this.$el = el;
-
-  this.options = {
-  };
 
   this.dynamicEnabled = false;
 
@@ -13,12 +10,6 @@ Switch.prototype = {
   initialize: function() {
     var self = this;
 
-    this._initBindings();
-  },
-
-  _initBindings: function() {
-    var self = this;
-
     this.$el.find("#static")
       .on("click", function(e) {
         e.preventDefault();
@@ -26,6 +17,9 @@ Switch.prototype = {
         if(self.dynamicEnabled) {
           self.dynamicEnabled = false;
           self.toggleDynamic(false);
+
+          $(this).closest("li").addClass("selected");
+          $(this).closest("li").siblings().removeClass("selected");
         } else {
           return false;
         }
@@ -38,6 +32,9 @@ Switch.prototype = {
         if(!self.dynamicEnabled) {
           self.dynamicEnabled = true;
           self.toggleDynamic(true);
+
+          $(this).closest("li").addClass("selected");
+          $(this).closest("li").siblings().removeClass("selected");
         } else {
           return false;
         }
@@ -45,17 +42,16 @@ Switch.prototype = {
   },
 
   toggleDynamic: function(dynamic) {
-    console.log(dynamic);
     if(dynamic) {
       $(this.$el).animate({
-        bottom: '100px'
-      });
+        bottom: '150px'
+      }, 250);
 
       Events.trigger("enableslider");
     } else {
       $(this.$el).animate({
-        bottom: '0'
-      });
+        bottom: '10px'
+      }, 250);
 
       Events.trigger("disableslider");
     }
