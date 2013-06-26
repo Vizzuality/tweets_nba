@@ -21,35 +21,22 @@ Map.prototype = {
       });
 
       self.map.addLayer(self.dinamycLayer);
-      self._tick = self._tick.bind(self);
-      self.previous_time = new Date().getTime();
-      self.play();
     });
   },
 
-  _tick: function() {
-    var now = new Date().getTime();
-    var delta =  0.001*(now - this.previous_time);
-    this.previous_time = now;
-    this.dinamycLayer._render(delta);
-
-    // var timeUpdated = new Date((this.dinamycLayer.time*15*60 + START_DATE)*1000)
-    // requestAnimationFrame(this._tick);
-  },
-
   set_time: function(t) {
-    // console.log(t);
-  },
-
-  play: function() {
-    this.dinamycLayer.play();
-    // requestAnimationFrame(this._tick);
-  },
-
-  stop: function() {
+    if(this.dinamycLayer) {
+      this.dinamycLayer.set_time(t);
+    }
   },
 
   render: function() {
-    requestAnimationFrame(this._tick);
+    var now = new Date().getTime();
+    var delta =  0.001*(now - this.previous_time);
+    this.previous_time = now;
+
+    if(this.dinamycLayer) {
+      this.dinamycLayer._render(delta);
+    }
   },
 }

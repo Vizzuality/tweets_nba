@@ -154,10 +154,11 @@ L.TimeLayer = L.CanvasLayer.extend({
   /** 
    * starts the animation
    */
-  play: function() {
-    this.playing = true;
-    //requestAnimationFrame(this._render);
-  },
+
+  // play: function() {
+  //   this.playing = true;
+  //   requestAnimationFrame(this._render);
+  // },
 
   _renderTile: function(tile, origin) {
       var xcoords = tile.xcoords;
@@ -175,6 +176,8 @@ L.TimeLayer = L.CanvasLayer.extend({
   },
 
   _render: function(delta) {
+    // console.log(delta);
+
     this._canvas.width = this._canvas.width;
     var origin = this._map._getNewTopLeftPoint(this._map.getCenter(), this._map.getZoom());
     this._ctx.translate(-origin.x, -origin.y);
@@ -184,14 +187,9 @@ L.TimeLayer = L.CanvasLayer.extend({
     this.entities.update(delta);
     this.entities.render(this._ctx);
 
-    this.realTime += delta*10;
-    var newTime = (this.realTime>>0);
-    if(newTime > this.time) {
-      this.time = newTime;
-      for(var i in this._tiles) {
-        var tile = this._tiles[i];
-        this._renderTile(tile, origin);
-      }
+    for(var i in this._tiles) {
+      var tile = this._tiles[i];
+      this._renderTile(tile, origin);
     }
 
     if(this.queue.length) {
@@ -205,24 +203,11 @@ L.TimeLayer = L.CanvasLayer.extend({
 
   },
 
-  setTime: function(d) {
-    this.realTime = d.getTime()/(15*60*1000) - this.options.start_date/(15*60);
-    this.time = this.realTime>>0;
-  },
-
-  resetTime: function() {
-    this.time = this.realTime= 0;
-  },
-
-  getTime: function() {
-    return new Date(1000*(this.options.start_date + this.realTime*15*60));
+  set_time: function(t) {
+    this.time = t;
+    // console.log(this.time);
   }
-
-
-
-
 });
-
 
 var Entities = function(size, remove_callback) {
     this.x = new Float32Array(size);
