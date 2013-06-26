@@ -1,7 +1,12 @@
+window.AppData = window.AppData || {};
+
+window.AppData.START_DATE = 1371160800;
+window.AppData.END_DATE = 1371938174;
+
 var App = {
   animables: [], // list of objects need to be updated and rendered
-  old_time: 0,
-  time: 0,
+  old_time: window.AppData.START_DATE,
+  time: window.AppData.START_DATE,
 
   initialize: function(options) {
     var self = this;
@@ -20,8 +25,8 @@ var App = {
 
     // Slider
     this.slider = new Slider($('#slider'), {
-      timeMin: START_DATE,
-      timeRange: (END_DATE - START_DATE) * 1
+      timeMin: window.AppData.START_DATE,
+      timeRange: (window.AppData.END_DATE - window.AppData.START_DATE) * 1
     });
 
     this._initBindings();

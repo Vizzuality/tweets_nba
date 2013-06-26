@@ -16,8 +16,8 @@ Map.prototype = {
       self.map = vis.getNativeMap();
 
       self.dinamycLayer = new L.TimeLayer({
-        start_date: START_DATE,
-        end_date: END_DATE
+        start_date: window.AppData.START_DATE,
+        end_date: window.AppData.END_DATE
       });
 
       self.map.addLayer(self.dinamycLayer);
