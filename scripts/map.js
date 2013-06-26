@@ -1,4 +1,5 @@
 
+
 function Map(options) {
   this.map = null;
   this.dinamycLayer = null;
@@ -21,13 +22,16 @@ Map.prototype = {
       });
 
       self.map.addLayer(self.dinamycLayer);
+      self.render = self.render.bind(self);
+      self.previous_time = new Date().getTime();
+      requestAnimationFrame(this.render);
     });
   },
 
   set_time: function(t) {
-    if(this.dinamycLayer) {
-      this.dinamycLayer.set_time(t);
-    }
+    // if(this.dinamycLayer) {
+    //   this.dinamycLayer.setTime(t);
+    // }
   },
 
   render: function() {
@@ -38,5 +42,5 @@ Map.prototype = {
     if(this.dinamycLayer) {
       this.dinamycLayer._render(delta);
     }
-  },
+  }
 }
