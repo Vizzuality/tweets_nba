@@ -11,6 +11,8 @@ function Slider(el, options) {
 
   this.valueStop = 0;
 
+  this.times = [1370567,1370822,1370999,1371172,1371427,1371604,1371777]
+
   this.results = {
     '1370567': 'SAS 92 MIA 88',
     '1370822': 'MIA 103 SAS 84',
@@ -21,13 +23,34 @@ function Slider(el, options) {
     '1371777': 'SAS 92 MIA 88'
   };
 
-  self.initialize();
+  this.initialize();
 }
 
 Slider.prototype = {
   initialize: function() {
     this.$el.slider();
     this._initBindings();
+    this.drawMatch();
+  },
+
+  drawMatch: function() {
+    for(var i = 0; i < this.times.length; i++) {
+      this.$el.append("<div class='match' style='left:" + this.timeToPos(this.times[i]*1000) + "%'></div>");
+    }
+  },
+
+  checkMatch: function(time) {
+    var match = this.results[parseInt(time*0.001, 10)];
+
+    if(typeof match != "undefined") {
+      $("#legend").text(match);
+    } else {
+      for(var i = 0; i < this.times.length-1; i++) {
+        if(parseInt(time*0.001, 10) > this.times[i] && parseInt(time*0.001, 10) < this.times[i+1]) {
+          $("#legend").text(this.results[this.times[i]]);
+        }
+      }
+    }
   },
 
   _initBindings: function() {
@@ -147,9 +170,7 @@ Slider.prototype = {
 
     $("#hour").html(hours + ":" + minutes + '<br /><span>' + date + '/' + month + '/' + year + '</span>');
 
-    if(typeof this.results[parseInt(time*0.001, 10)] != "undefined") {
-      $("#legend").html(this.results[parseInt(time*0.001, 10)]);
-    }
+    this.checkMatch(time);
   },
 
   posToTime: function(pos) {

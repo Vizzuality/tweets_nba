@@ -146,7 +146,7 @@ body {
 .slider {
   height: 1px;
   margin: 0 auto;
-  border-top: 2px solid #000;
+  border-top: 2px solid #111;
   width: 200px;
   position: relative;
   box-shadow: 0 1px 1px rgba(255, 255, 255, .15);
@@ -155,6 +155,7 @@ body {
 .slider a {
   display: block;
   position: absolute;
+  z-index: 100;
   left: 0;
   margin-left: -9px;
   top: -9px;
@@ -183,4 +184,13 @@ body {
 .legend {
   font-size: 14px;
   font-weight: normal;
+}
+
+.match {
+  position: absolute;
+  width: 2px;
+  height: 5px;
+  top: -2px;
+  background: #333;
+  box-shadow: 0 1px 1px #000;
 }
