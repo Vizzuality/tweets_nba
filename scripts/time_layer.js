@@ -192,6 +192,13 @@ L.TimeLayer = L.CanvasLayer.extend({
         var tile = this._tiles[i];
         this._renderTile(tile, origin);
       }
+      var randomQueue = [];
+      while(this.queue.length) {
+        var idx = (Math.random()*this.queue.length) | 0;
+        var el = this.queue.splice(idx, 1);
+        randomQueue.push(el[0]);
+      }
+      this.queue = randomQueue;
     }
 
     if(this.queue.length) {
@@ -202,12 +209,16 @@ L.TimeLayer = L.CanvasLayer.extend({
         this.entities.add(p[0], p[1], p[2], p[3]);
       }
     }
-
   },
 
   setTime: function(d) {
-    this.realTime = d.getTime()/(15*60*1000) - this.options.start_date/(15*60);
+    this.realTime = new Date(d).getTime()/(15*60*1000) - this.options.start_date/(15*60);
     this.time = this.realTime>>0;
+  },
+
+  set_time: function(t) {
+    this.realTime = new Date(t).getTime()/(15*60) - this.options.start_date/(15*60);
+    this.time = this.realTime >> 0;
   },
 
   resetTime: function() {
@@ -217,12 +228,7 @@ L.TimeLayer = L.CanvasLayer.extend({
   getTime: function() {
     return new Date(1000*(this.options.start_date + this.realTime*15*60));
   }
-
-
-
-
 });
-
 
 var Entities = function(size, remove_callback) {
     this.x = new Float32Array(size);
@@ -291,6 +297,9 @@ Entities.prototype.update = function(dt) {
         //var c = (this.life[i] -= this.life[i]*0.15);
         var diff = this.life[i] - this.current_life[i];
         this.current_life[i] += diff*dt*window.BALL_ANIMATION_SPEED;
+
+        this.current_life[i] = Math.min(this.life[i], this.current_life[i]);
+
         if(diff <= 0.05) {
           _remove[removed++] = i;
         }

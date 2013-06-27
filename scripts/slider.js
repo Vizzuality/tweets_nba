@@ -27,6 +27,9 @@ Slider.prototype = {
     Events.on("disableslider", this._onDisableSlider, this);
     Events.on("resumeanimation", this._onResumeAnimation, this);
     Events.on("stopanimation", this._onStopAnimation, this);
+    Events.on("resettime", function() {
+      self.updateHour(self.options.timeMin);
+    });
 
     Events.on("clickhandle", function(val) {
       clicked = true;
@@ -43,6 +46,8 @@ Slider.prototype = {
 
         dragged = false;
         clicked = false;
+
+        App.map.play();
 
         $(this).off('mousemove');
       }
@@ -74,6 +79,8 @@ Slider.prototype = {
     $(this.$slider_container).animate({
       bottom: '30px'
     }, 250);
+
+    Events.trigger("resumeanimation");
   },
 
   _onDisableSlider: function() {
@@ -82,6 +89,7 @@ Slider.prototype = {
     }, 250);
 
     Events.trigger("stopanimation");
+    Events.trigger("resettime");
   },
 
   _onSlideStart: function(pos) {
@@ -106,6 +114,8 @@ Slider.prototype = {
     stopped = false;
 
     $(".ui-slider-handle").removeClass("stopped");
+
+    App.map.play();
   },
 
   _onStopAnimation: function() {
@@ -134,10 +144,6 @@ Slider.prototype = {
 
   timeToPos: function(time) {
     return (time - this.options.timeMin) * 100 / this.options.timeRange;
-  },
-
-  render: function() { // empty on purpose
-    
   },
 
   set_time: function(time) {

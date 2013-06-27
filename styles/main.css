@@ -55,7 +55,7 @@ body {
   left: 50%;
   width: 380px;
   margin-left: -200px;
-  padding: 15px 0 25px;
+  padding: 15px 0;
   text-align: center;
   background: rgba(0,0,0,.2);
   border-bottom-left-radius: 3px;
@@ -67,7 +67,7 @@ body {
 }
 
 .header .subtitle {
-  margin-top: 5px;
+  margin: 5px auto 10px;
   font-size: 19px;
   font-weight: 300;
   color: #eee;
@@ -91,7 +91,7 @@ body {
 .switch {
   position: absolute;
   z-index: 100;
-  bottom: 10px;
+  bottom: 150px;
   left: 50%;
   margin-left: -100px;
   width: 200px;
@@ -128,7 +128,7 @@ body {
 .slider_wrapper {
   position: absolute;
   z-index: 100;
-  bottom: -110px;
+  bottom: 30px;
   left: 50%;
   margin-left: -122px;
   border: 2px solid #222;
@@ -161,14 +161,14 @@ body {
   content: '';
   height: 17px;
   width: 17px;
-  background: #eee url('../images/slider-pause.png') center no-repeat;
+  background: #eee url('../images/slider-sprite.png') center 0 no-repeat;
   cursor: move;
   border-radius: 2px;
   outline: none;
 }
 
 .slider a.stopped {
-  background: #fff url('../images/slider.png') center no-repeat;
+  background: #fff url('../images/slider-sprite.png') center bottom no-repeat;
 }
 
 .hour {

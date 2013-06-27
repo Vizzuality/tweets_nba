@@ -7,6 +7,7 @@ var App = {
   animables: [], // list of objects need to be updated and rendered
   old_time: window.AppData.START_DATE,
   time: window.AppData.START_DATE,
+  last_time: window.AppData.END_DATE,
 
   initialize: function(options) {
     var self = this;
@@ -45,6 +46,10 @@ var App = {
     Events.on("changetime", function(time) {
       self.time = time >> 0;
     });
+
+    Events.on("resettime", function(time) {
+      self.time = window.AppData.START_DATE >> 0;
+    });
   },
 
   _tick: function() {
@@ -76,22 +81,20 @@ var App = {
     if(!stopped && !clicked){
       this.time += dt;
 
-      if(this.time/60 >= this.last_time) {
-        this.time = 0;
+      if(this.time >= this.last_time) {
+        Events.trigger("resettime");
       }
 
       for(var i = 0; i < animables.length; ++i) {
         var a = animables[i];
 
         a.set_time(this.time);
-        a.render();
       }
     } else if(dragged) {
       for(var i = 0; i < animables.length; ++i) {
         var a = animables[i];
 
         a.set_time(this.time);
-        a.render();
       }
     }
   }
