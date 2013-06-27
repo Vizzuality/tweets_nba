@@ -1,3 +1,7 @@
+var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+window.requestAnimationFrame = requestAnimationFrame;
+
 L.CanvasLayer = L.Class.extend({
 
   includes: [L.Mixin.Events, L.Mixin.TileLoader],

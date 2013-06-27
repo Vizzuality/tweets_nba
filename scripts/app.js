@@ -34,7 +34,10 @@ var App = {
     
     this.animables.push(this.map, this.slider);
     this._tick = this._tick.bind(this);
-    requestAnimationFrame(this._tick);
+
+    setTimeout(function() {
+      requestAnimationFrame(self._tick);
+    }, 17);
   },
 
   _initBindings: function() {
