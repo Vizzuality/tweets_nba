@@ -1,7 +1,7 @@
 function Switch(el) {
   this.$el = el;
 
-  this.dynamicEnabled = true;
+  this.dynamicEnabled = false;
 
   this.initialize();
 }

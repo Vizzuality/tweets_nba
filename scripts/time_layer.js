@@ -298,7 +298,7 @@ Entities.prototype.update = function(dt) {
         var diff = this.life[i] - this.current_life[i];
         this.current_life[i] += diff*dt*window.BALL_ANIMATION_SPEED;
 
-        this.current_life[i] = Math.min(this.life[i], this.current_life[i]);
+        this.current_life[i] = Math.min(this.life[i] - 0.001, this.current_life[i]);
 
         if(diff <= 0.05) {
           _remove[removed++] = i;

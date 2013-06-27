@@ -40,12 +40,13 @@
   <!-- Switch -->
   <nav id="switch" class="switch">
     <ul class="menu">
-      <li><a href="#" id="static">Static</a></li><li class="selected"><a href="#" id="dynamic">Dynamic</a></li>
+      <li class="selected"><a href="#" id="static">Static</a></li><li><a href="#" id="dynamic">Dynamic</a></li>
     </ul>
   </nav>
 
   <!-- Slider -->
   <div id="slider_wrapper" class="slider_wrapper">
+    <p id="legend" class="legend">SAS 92 MIA 88</p>
     <div id="slider" class="slider"></div>
     <p id="hour" class="hour">0:00<br /><span>14/6/2013</span></p>
   </div>
@@ -72,6 +73,18 @@
   <script src="scripts/switch.js"></script>
   <script src="scripts/map.js"></script>
   <script src="scripts/app.js"></script>
-  <script src="scripts/main.js"></script>
+
+  <script type="text/javascript">
+    var BALLS_COLOR_ES = 'rgba(255, 77, 77, .4)',
+      BALLS_COLOR_NO_ES = 'rgba(238, 238, 238, .2)',
+      BALL_SIZE_GAIN = 3; // ball size is greater when this value is increased,
+      BALL_ANIMATION_SPEED = 3; // no more than 5,
+      dragged = false,
+      clicked = false,
+      stopped = true,
+      valueStart = 0;
+
+    App.initialize();
+  </script>
 </body>
 </html>

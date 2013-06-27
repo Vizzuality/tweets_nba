@@ -16,8 +16,6 @@ Map.prototype = {
     window.Vis = cartodb.createVis('map', 'scripts/data/viz.json').done(function(vis, layers) {
       self.map = vis.getNativeMap();
 
-      var staticLayer = layers[1].getSubLayer(2).hide();
-
       self.dinamycLayer = new L.TimeLayer({
         start_date: window.AppData.START_DATE,
         end_date: window.AppData.END_DATE

@@ -11,6 +11,16 @@ function Slider(el, options) {
 
   this.valueStop = 0;
 
+  this.results = {
+    '1370567': 'SAS 92 MIA 88',
+    '1370822': 'MIA 103 SAS 84',
+    '1370999': 'SAS 113 MIA 77',
+    '1371172': 'MIA 109 SAS 93',
+    '1371427': 'SAS 114 MIA 104',
+    '1371604': 'MIA 103 SAS 100',
+    '1371777': 'SAS 92 MIA 88'
+  };
+
   self.initialize();
 }
 
@@ -77,7 +87,7 @@ Slider.prototype = {
 
   _onEnableSlider: function() {
     $(this.$slider_container).animate({
-      bottom: '30px'
+      bottom: '15px'
     }, 250);
 
     Events.trigger("resumeanimation");
@@ -85,7 +95,7 @@ Slider.prototype = {
 
   _onDisableSlider: function() {
     $(this.$slider_container).animate({
-      bottom: '-110px'
+      bottom: '-125px'
     }, 250);
 
     Events.trigger("stopanimation");
@@ -136,6 +146,10 @@ Slider.prototype = {
     minutes = (minutes<10?'0':'') + minutes;
 
     $("#hour").html(hours + ":" + minutes + '<br /><span>' + date + '/' + month + '/' + year + '</span>');
+
+    if(typeof this.results[parseInt(time*0.001, 10)] != "undefined") {
+      $("#legend").html(this.results[parseInt(time*0.001, 10)]);
+    }
   },
 
   posToTime: function(pos) {

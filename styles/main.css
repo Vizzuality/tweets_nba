@@ -63,12 +63,12 @@ body {
 }
 
 .header .title {
-  font-size: 27px;
+  font-size: 24px;
 }
 
 .header .subtitle {
   margin: 5px auto 10px;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 300;
   color: #eee;
 }
@@ -91,7 +91,7 @@ body {
 .switch {
   position: absolute;
   z-index: 100;
-  bottom: 150px;
+  bottom: 10px;
   left: 50%;
   margin-left: -100px;
   width: 200px;
@@ -128,12 +128,12 @@ body {
 .slider_wrapper {
   position: absolute;
   z-index: 100;
-  bottom: 30px;
+  bottom: -125px;
   left: 50%;
   margin-left: -122px;
   border: 2px solid #222;
   width: 240px;
-  padding: 20px 0 10px;
+  padding: 10px 0;
   font: bold 27px/1 "enhanced_dot_digital-7regular";
   color: #EDB011;
   text-align: center;
@@ -149,7 +149,7 @@ body {
   border-top: 2px solid #000;
   width: 200px;
   position: relative;
-  box-shadow: 0 1px 3px rgba(255, 255, 255, .1);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, .15);
 }
 
 .slider a {
@@ -175,7 +175,12 @@ body {
   margin-top: 15px;
 }
 
-.hour span {
+.legend {
+  margin-bottom: 15px;
+}
+
+.hour span,
+.legend {
   font-size: 14px;
   font-weight: normal;
 }
