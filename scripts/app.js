@@ -1,6 +1,6 @@
 window.AppData = window.AppData || {};
 
-window.AppData.START_DATE = 1370566800;
+window.AppData.START_DATE = 1370566800-3600; // one hour before
 window.AppData.END_DATE = 1371938174;
 
 var App = {

@@ -20,7 +20,7 @@ function Slider(el, options) {
     '1371172': 'MIA 109 SAS 93',
     '1371427': 'SAS 114 MIA 104',
     '1371604': 'MIA 103 SAS 100',
-    '1371777': 'SAS 92 MIA 88'
+    '1371777': 'MIA 95 SAS 88'
   };
 
   this.initialize();
@@ -38,16 +38,16 @@ Slider.prototype = {
       this.$el.append("<div class='match' style='left:" + this.timeToPos(this.times[i]*1000) + "%'></div>");
     }
   },
-
   checkMatch: function(time) {
     var match = this.results[parseInt(time*0.001, 10)];
-
     if(typeof match != "undefined") {
       $("#legend").text(match);
     } else {
       for(var i = 0; i < this.times.length-1; i++) {
         if(parseInt(time*0.001, 10) > this.times[i] && parseInt(time*0.001, 10) < this.times[i+1]) {
           $("#legend").text(this.results[this.times[i]]);
+        } else if(parseInt(time*0.001, 10) > this.times[this.times.length-1]) {
+          $("#legend").text(this.results[this.times[this.times.length-1]]);
         }
       }
     }
