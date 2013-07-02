@@ -18,6 +18,7 @@ L.TimeLayer = L.CanvasLayer.extend({
     step: 15*60,
     resolution:1,
     countby:'count(i.cartodb_id)',
+    cdn_url: "0.tiles.cartocdn.com"
   },
 
   initialize: function(options) {
@@ -46,7 +47,9 @@ L.TimeLayer = L.CanvasLayer.extend({
   sql: function(sql, callback) {
     var self = this;
     this.base_url = 'http://' + this.options.user + '.cartodb.com/api/v2/sql';
-
+    if (this.options.cdn_url)
+        this.base_url = 'http://' + this.options.cdn_url + '/'+ this.options.user +'/api/v2/sql';
+        
     $.getJSON(this.base_url + "?q=" + encodeURIComponent(sql), function (data) {
         callback(data);
     });
