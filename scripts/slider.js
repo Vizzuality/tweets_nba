@@ -12,6 +12,7 @@ function Slider(el, options) {
   this.valueStop = 0;
 
   this.times = [1370567,1370822,1370999,1371172,1371427,1371604,1371777]
+  this.animationscaletimes = [1370567,1370583,1370806,1370838,1370983,1371015,1371156,1371188,1371411,1371443,1371588,1371620,1371761,1371793]
 
   this.results = {
     '1370567': 'SAS 92 MIA 88',
@@ -21,6 +22,23 @@ function Slider(el, options) {
     '1371427': 'SAS 114 MIA 104',
     '1371604': 'MIA 103 SAS 100',
     '1371777': 'MIA 95 SAS 88'
+  };
+
+  this.animationscales = {
+    '1370567': 5,
+    '1370583': 10,
+    '1370806': 5,
+    '1370838': 10,
+    '1370983': 5,
+    '1371015': 10,
+    '1371156': 5,
+    '1371188': 10,
+    '1371411': 5,
+    '1371443': 10,
+    '1371588': 5,
+    '1371620': 10,
+    '1371761': 5,
+    '1371793': 10
   };
 
   this.initialize();
@@ -48,6 +66,14 @@ Slider.prototype = {
           $("#legend").text(this.results[this.times[i]]);
         } else if(parseInt(time*0.001, 10) > this.times[this.times.length-1]) {
           $("#legend").text(this.results[this.times[this.times.length-1]]);
+        }
+      }
+
+      for(var i = 0; i < this.animationscaletimes.length-1; i++) {
+        if(parseInt(time*0.001, 10) > this.animationscaletimes[i] && parseInt(time*0.001, 10) < this.animationscaletimes[i+1]) {
+          window.AppData.ANIMATION_SCALE = this.animationscales[this.animationscaletimes[i]];
+        } else if(parseInt(time*0.001, 10) > this.times[this.times.length-1]) {
+          window.AppData.ANIMATION_SCALE = this.animationscales[this.animationscaletimes[this.animationscaletimes.length-1]];
         }
       }
     }

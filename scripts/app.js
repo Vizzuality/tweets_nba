@@ -1,8 +1,3 @@
-window.AppData = window.AppData || {};
-
-window.AppData.START_DATE = 1370566800-3600; // one hour before
-window.AppData.END_DATE = 1371938174;
-
 var App = {
   animables: [], // list of objects need to be updated and rendered
   old_time: window.AppData.START_DATE,
@@ -37,7 +32,7 @@ var App = {
 
     setTimeout(function() {
       requestAnimationFrame(self._tick);
-    }, 17);
+    }, 1);
   },
 
   _initBindings: function() {
@@ -77,8 +72,8 @@ var App = {
     var t0 = new Date().getTime();
     var dt = 0.001*(t0 - this.old_time);
 
-    dt = dt*15*60;
-    dt = Math.min(15*60, dt); // dont allow the time advance more than 15 mins
+    dt = dt*15*60*window.AppData.ANIMATION_SCALE;
+    dt = Math.min(15*60*window.AppData.ANIMATION_SCALE, dt); // dont allow the time advance more than 15 mins
     this.old_time = t0;
 
     if(!stopped && !clicked){
