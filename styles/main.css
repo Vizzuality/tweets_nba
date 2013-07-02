@@ -57,7 +57,7 @@ body {
   margin-left: -200px;
   padding: 15px 0;
   text-align: center;
-  background: rgba(0,0,0,.2);
+  background: rgba(0,0,0,.6);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
@@ -193,4 +193,31 @@ body {
   top: -2px;
   background: #333;
   box-shadow: 0 1px 1px #000;
+}
+
+.teams {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.team {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.team + .team {
+  margin-left: 20px;
+}
+
+.team em {
+  float: left;
+  display: block;
+  height: 14px;
+  width: 14px;
+  margin-right: 5px;
+  background: url('../images/teams-bg.png');
+}
+
+.team.sas em {
+  background-position: 0 -14px;
 }
