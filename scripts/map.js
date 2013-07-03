@@ -41,6 +41,7 @@ Map.prototype = {
     this.previous_time = now;
 
     if(this.dinamycLayer && !stopped && !clicked) {
+      delta = Math.min(0.03, delta);
       this.dinamycLayer._render(delta);
 
       requestAnimationFrame(this._tick);      
