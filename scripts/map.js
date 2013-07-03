@@ -36,14 +36,19 @@ Map.prototype = {
   },
 
   _tick: function() {
+    var self = this;
+
     var now = new Date().getTime();
     var delta =  0.001*(now - this.previous_time);
     this.previous_time = now;
 
     if(this.dinamycLayer && !stopped && !clicked) {
+      delta = Math.min(0.03, delta);
       this.dinamycLayer._render(delta);
 
-      requestAnimationFrame(this._tick);      
+      setTimeout(function() {
+        requestAnimationFrame(self._tick);
+      }, 1);
     }
   },
 

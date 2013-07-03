@@ -178,7 +178,6 @@ L.TimeLayer = L.CanvasLayer.extend({
   },
 
   _render: function(delta) {
-    // console.log(new Date((this.time*15*60 + window.AppData.START_DATE)*1000));
 
     this._canvas.width = this._canvas.width;
     var origin = this._map._getNewTopLeftPoint(this._map.getCenter(), this._map.getZoom());
@@ -204,11 +203,20 @@ L.TimeLayer = L.CanvasLayer.extend({
         randomQueue.push(el[0]);
       }
       this.queue = randomQueue;
+      //console.log("emit", randomQueue.length);
     }
 
     if(this.queue.length) {
-      var emit = Math.min(100, this.queue.length);
-      //emit = 1;
+      // know the time we have left to emit the particles and emit little by little
+      var next = this.time + 1;
+      var remaining = next - this.realTime;
+      // estimate the remaining frames
+      var remainingFrames = remaining/delta; 
+      // be sure we dont emit more than we have pending
+      if(remainingFrames < 1) {
+        remainingFrames = 1;
+      }
+      var emit = (this.queue.length/remainingFrames)>>0;
       while(emit--) {
         var p = this.queue.pop();
         this.entities.add(p[0], p[1], p[2], p[3]);
