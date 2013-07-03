@@ -38,9 +38,9 @@ L.TimeLayer = L.CanvasLayer.extend({
 
     this.MAX_UNITS = this.options.steps + 2;
     this.entities = new Entities(7000);
-    this.time = -(4*24); // one day before
+    this.time = 0;
     this.queue = [];
-    this.realTime = -(4*24.0); // one day before
+    this.realTime = 0.0;
   },
 
   sql: function(sql, callback) {
@@ -214,12 +214,12 @@ L.TimeLayer = L.CanvasLayer.extend({
   },
 
   setTime: function(d) {
-    this.realTime = new Date(d).getTime()/(15*60*1000) - this.options.start_date/(15*60) - (4*24); // one day before
+    this.realTime = new Date(d).getTime()/(15*60*1000) - this.options.start_date/(15*60);
     this.time = this.realTime>>0;
   },
 
   set_time: function(t) {
-    this.realTime = new Date(t).getTime()/(15*60) - this.options.start_date/(15*60) - (4*24); // one day before
+    this.realTime = new Date(t).getTime()/(15*60) - this.options.start_date/(15*60);
     this.time = this.realTime >> 0;
   },
 
