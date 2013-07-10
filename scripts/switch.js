@@ -1,5 +1,8 @@
-function Switch(el) {
+function Switch(el, options) {
   this.$el = el;
+  this.options = _.extend({}, options);
+
+  this.mode = this.options.mode;
 
   this.dynamicEnabled = false;
 
@@ -45,6 +48,19 @@ Switch.prototype = {
           return false;
         }
       });
+
+    if(this.mode === "dynamic") {
+      setTimeout(function() {
+        self.dynamicEnabled = true;
+        self.toggleDynamic(true);
+
+        $("#dynamic").closest("li").addClass("selected");
+        $("#dynamic").closest("li").siblings().removeClass("selected");
+
+        window.Vis.getLayers()[1].getSubLayer(2).hide();
+        App.map.map.addLayer(App.map.dinamycLayer);
+      }, 100);
+    }
   },
 
   toggleDynamic: function(dynamic) {
