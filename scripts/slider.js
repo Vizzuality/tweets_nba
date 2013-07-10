@@ -198,7 +198,7 @@ Slider.prototype = {
 
     minutes = (minutes<10?'0':'') + minutes;
 
-    $("#hour").html(hours + ":" + minutes + '<br /><span>' + date + '/' + month + '/' + year + '</span>');
+    $("#hour").html(hours + ":" + minutes + '<br /><span>' + month + '/' + date + '/' + year + '</span>');
 
     this.checkMatch(time);
   },
