@@ -96,7 +96,15 @@
       stopped = true,
       valueStart = 0;
 
-    App.initialize();
+      var hash = location.hash.split("#").pop();
+
+      if(hash.length === 0) {
+        App.initialize();
+      } else if(hash.split("/")[0] === "dynamic") {
+        App.initialize({mode: "dynamic"});
+      } else if(hash.split("/")[0] === "static") {
+        App.initialize();
+      }
   </script>
 </body>
 </html>

@@ -9,11 +9,13 @@ var App = {
 
     this.options = _.extend({}, options);
 
+    this.mode = this.options.mode || "";
+
     // Map
     this.map = new Map();
 
     // Switch
-    this.switch = new Switch($('#switch'));
+    this.switch = new Switch($('#switch'), {mode: self.mode});
 
     // ****
     // Map animated particled
