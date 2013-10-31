@@ -49,7 +49,7 @@ L.TimeLayer = L.CanvasLayer.extend({
     if (this.options.cdn_url)
         this.base_url = 'http://' + this.options.cdn_url + '/'+ this.options.user +'/api/v2/sql';
         
-    $.getJSON(this.base_url + "?rambo=1&q=" + encodeURIComponent(sql), function (data) {
+    $.getJSON(this.base_url + "?rambo=2&q=" + encodeURIComponent(sql), function (data) {
         callback(data);
     });
   },
